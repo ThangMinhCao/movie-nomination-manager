@@ -1,0 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+$text-field-height: 60px;
+$main-font: 'Staatliches', cursive;
+$dark-color: #202C39;
+$standard-margin: 40px;
+
+.page-header {
+  width: 100%;
+  margin: $standard-margin;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap-reverse;
+
+  .text-field {
+    outline: none;
+    font-family: $main-font;
+    height: $text-field-height;
+    width: $text-field-height * 8;
+    border-radius: 500px;
+    border: 8px solid $dark-color;
+    margin: $standard-margin;
+    font-size: 40px;
+    padding-left: 30px;
+    padding-right: 30px;
+    filter: drop-shadow(4px 4px 20px rgba(0, 0, 0, 0.25));
+    transition: ease-out 0.1s;
+
+    &:hover, &:focus {
+      border: 10px solid $dark-color;
+      transition: ease 0.1s;
+    }
+  }
+
+  .page-title {
+    color: $dark-color;
+    font-family: $main-font;
+    font-size: 150px;
+    min-width: 55%;
+    text-align: center;
+    filter: drop-shadow(4px 4px 12px rgba(0, 0, 0, 0.15));
+  }
+}

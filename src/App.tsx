@@ -1,18 +1,12 @@
 import * as React from 'react';
+import PageHeader from './components/PageHeader/PageHeader';
 import './App.scss';
 
 const App = () => {
 
   return (
     <div className="page-container">
-      <div className="page-header">
-        <div className="search-bar">
-          <input className="text-field" placeholder="Search..." />
-        </div>
-        <div className="page-title">
-          The Shoppies
-        </div>
-      </div>
+      <PageHeader />
       <div className="result-list">
         Results
       </div>
