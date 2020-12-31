@@ -1,18 +1,17 @@
 import * as React from 'react';
+import { useState } from 'react';
 import PageHeader from './components/PageHeader/PageHeader';
+import MovieList from './components/MovieList/MovieList';
 import './App.scss';
 
 const App = () => {
+  const [results, setResults] = useState<Array<MovieType>>([]);
 
   return (
-    <div className="page-container">
+    <div className="components-container">
       <PageHeader />
-      <div className="result-list">
-        Results
-      </div>
-      <div className="nomination-list">
-        Nominations
-      </div>
+      <MovieList itemList={results} />
+      <MovieList showElementsNumber itemList={results} />
     </div>
   );
 }
