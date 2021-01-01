@@ -1,4 +1,4 @@
-import { MutableRefObject, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import './MovieList.scss';
 import MovieCard from '../MovieCard/MovieCard';
 
@@ -42,17 +42,18 @@ const MovieList = ({ showElementsNumber = false, itemList }: MovieListProps) => 
           }
         </div>
       </div>
+      {/* TODO Change styles of these buttons */}
       <button onClick={() => scroll('left')}>
         Left
       </button>
-      <div className="items-container" ref={scrollRef}>
-        {
-          itemList.map((item) => (
-            // TODO Add MovieItem component here
-            <MovieCard title={item.title} year={item.year} posterURL={item.posterURL} />
-          ))
-        }
-      </div>
+        <div className="items-container" ref={scrollRef}>
+          {
+            itemList.map((item, index) => (
+              // TODO Add MovieItem component here
+              <MovieCard key={index} title={item.title} year={item.year} posterURL={item.posterURL} />
+            ))
+          }
+        </div>
       <button onClick={() => scroll('right')}>
         Right 
       </button>

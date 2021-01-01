@@ -48,12 +48,10 @@ $movie-card-height: $list-height - 2 * $spacing;
       repeat(var(--colNum), $movie-card-width)
       0.1px;
     grid-auto-flow: column;
-    overflow-X: scroll;
+    overflow-X: auto;
     gap: 10px;
     scroll-behavior: smooth;
-    scrollbar-width: none;
-    padding-bottom: 0;
-    margin-bottom: 0;
+    scrollbar-color: #cfcfcf;
 
     height: $list-height;
     width: 100%;
@@ -62,9 +60,26 @@ $movie-card-height: $list-height - 2 * $spacing;
     border-radius: 20px;
     box-shadow: $shadow;
     z-index: 1000;
+
+    &::-webkit-scrollbar {
+      height: 6px;
+      width: 10px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: #cfcfcf;
+      border-left: 25px solid transparent;
+      border-right: 25px solid transparent;
+      border-bottom: 3px solid transparent;
+      background-clip: content-box;
+    }
+
+    &::-webkit-scrollbar-track { 
+      border-radius: 5px; 
+    } 
   }
 
   .items-container::after {
     content: '';
   }
 }
+
