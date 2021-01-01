@@ -1,4 +1,3 @@
-import * as React from 'react';
 import './PageHeader.scss';
 
 const PageHeader = () => {

@@ -1,0 +1,24 @@
+$card-border-radius: 20px;
+
+.movie-card {
+  height: 100%;
+  border-radius: $card-border-radius;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);
+
+  .hover-overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 100%;
+    border-radius: $card-border-radius;
+    opacity: 0;
+    transition: opacity 0.1s ease-out;
+  }
+
+  &:hover .hover-overlay {
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s, opacity 0.1s ease-out;
+  }
+}

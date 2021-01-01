@@ -1,5 +1,6 @@
-import * as React from 'react';
+import { MutableRefObject, useEffect, useRef } from 'react';
 import './MovieList.scss';
+import MovieCard from '../MovieCard/MovieCard';
 
 interface MovieListProps{
   showElementsNumber?: boolean,
@@ -7,6 +8,20 @@ interface MovieListProps{
 }
 
 const MovieList = ({ showElementsNumber = false, itemList }: MovieListProps) => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    document.documentElement.style.setProperty("--colNum", itemList.length.toString());
+  })
+
+  const scroll = (dir: string) => {
+    if (dir === 'left' && scrollRef.current) {
+      scrollRef.current.scrollLeft -= window.innerWidth * 0.8;
+    } else if (dir === 'right' && scrollRef.current) {
+      scrollRef.current.scrollLeft += window.innerWidth * 0.8;
+    }
+  }
+
   return (
     <div className="movie-list">
       <div className="polygon-shadow">
@@ -20,23 +35,27 @@ const MovieList = ({ showElementsNumber = false, itemList }: MovieListProps) => 
                   |
                 </div>
                 <div className="text">
-                  4
+                  {itemList.length}
                 </div>
               </>
             : null 
           }
         </div>
       </div>
-      <div className="items-container">
+      <button onClick={() => scroll('left')}>
+        Left
+      </button>
+      <div className="items-container" ref={scrollRef}>
         {
           itemList.map((item) => (
             // TODO Add MovieItem component here
-            <div>
-              Item
-            </div>
+            <MovieCard title={item.title} year={item.year} posterURL={item.posterURL} />
           ))
         }
       </div>
+      <button onClick={() => scroll('right')}>
+        Right 
+      </button>
     </div>
   )
 }
