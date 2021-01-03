@@ -15,11 +15,12 @@ $rotating-button-duration: 0.5s;
   }
 }
 .movie-card {
+  margin-right: 10px;
   height: 100%;
   flex-shrink: 0;
   width: $movie-card-width;
   border-radius: $card-border-radius;
-  // border: 2px solid rgba(0, 0, 0, 1);
+  border: 1px solid rgba(0, 0, 0, 0.3);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;

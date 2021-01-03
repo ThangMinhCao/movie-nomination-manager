@@ -1,26 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
-$main-font: 'Staatliches', cursive;
-$dark-color: #202C39;
-$standard-margin: 40px;
+@import url("https://fonts.googleapis.com/css2?family=Staatliches&display=swap");
+$main-font: "Staatliches", cursive;
+$dark-color: #202c39;
 $page-title-size: 140px;
 
 .components-container {
-  height: 90vh;
-  margin-top: auto;
-  margin-right: auto;
-  padding-left: 50px;
-  padding-right: 50px;
+  height: fit-content;
+  width: 80vw;
+  margin-left: 50px;
+  margin-right: 50px;
+  min-width: 600px;
+  max-width: 2000px;
+  padding-bottom: 20px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: auto;
 
   .page-header {
     width: 100%;
-    margin-top: $standard-margin;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap-reverse;
 
-    .page-title, .subtitle {
+    .page-title,
+    .subtitle {
       color: $dark-color;
       font-family: $main-font;
       font-size: $page-title-size;

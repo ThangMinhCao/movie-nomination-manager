@@ -11,6 +11,9 @@ const App = () => {
   const [results, setResults] = useState<Array<MovieType>>([]);
   const [nominations, setNominations] = useState<Array<MovieType>>([]);
 
+  /**
+   * Call the API to search for title every time "searchTerm" change
+   */
   useEffect(() => {
     setSearchError("");
     setResults([]);
@@ -26,19 +29,49 @@ const App = () => {
           }
           setSearchError(message);
         } else {
-          setResults(response.data.Search); 
+          setResults(response.data.Search);
         }
       } catch (error) {
         console.log(error);
       }
+      return false;
     };
 
     const trimmedTerm = searchTerm.trim();
     if (trimmedTerm !== "") {
-      searchMovie(trimmedTerm);
+      searchMovie(searchTerm);
     }
   }, [searchTerm]);
 
+  /**
+   * Check and get data from localStorage (if available)
+   */
+  useEffect(() => {
+    const localData = localStorage.getItem("nominations");
+    if (localData && JSON.parse(localData)) {
+      setNominations(JSON.parse(localData));
+    }
+  }, []);
+
+  /**
+   * Add a event listener to save nominations to localStorage before unmount
+   */
+  useEffect(() => {
+    const saveToLocal = () => {
+      localStorage.setItem("nominations", JSON.stringify(nominations));
+    };
+    window.addEventListener("beforeunload", saveToLocal);
+
+    return () => {
+      window.removeEventListener("beforeunload", saveToLocal);
+    };
+  }, [nominations]);
+
+  /**
+   * Check if 2 movie objects are equals
+   * @param movie1
+   * @param movie2
+   */
   const isEquals = (movie1: MovieType, movie2: MovieType): boolean => {
     return (
       movie1.Title === movie2.Title &&
@@ -48,6 +81,10 @@ const App = () => {
     );
   };
 
+  /**
+   * Add "movie" to the nomination list
+   * @param movie
+   */
   const addNomination = (movie: MovieType): void => {
     if (nominations.length >= 5) {
       console.log("Your nomination list is full.");
@@ -59,6 +96,10 @@ const App = () => {
     setNominations([...nominations, movie]);
   };
 
+  /**
+   * Remove "movie" out of the nomination list
+   * @param movie
+   */
   const removeNomination = (movie: MovieType): void => {
     if (!nominations.includes(movie)) {
       console.log("The given movie is not in the nomination list");
@@ -67,6 +108,10 @@ const App = () => {
     setNominations(nominations.filter((item) => !isEquals(item, movie)));
   };
 
+  /**
+   * Check if "movie" is nominated or not
+   * @param movie
+   */
   const isNominated = (movie: MovieType): boolean => {
     for (let i = 0; i < nominations.length; i++) {
       if (isEquals(nominations[i], movie)) {
@@ -93,16 +138,16 @@ const App = () => {
         isNominated={isNominated}
         nominate={addNomination}
         removeNomination={removeNomination}
-        listName="Results"
-        itemList={results}
+        title="Results"
+        movies={results}
       />
       <MovieList
         isNominated={isNominated}
         nominate={addNomination}
         removeNomination={removeNomination}
-        listName="Nominations"
+        title="Nominations"
         showElementsNumber
-        itemList={nominations}
+        movies={nominations}
       />
     </div>
   );

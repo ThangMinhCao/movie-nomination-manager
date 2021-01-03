@@ -1,12 +1,11 @@
 $text-field-height: 60px;
-$main-font: 'Staatliches', cursive;
-$dark-color: #202C39;
+$main-font: "Staatliches", cursive;
+$dark-color: #202c39;
 $standard-margin: 40px;
 $text-field-font-size: 35px;
-$error-color: #FE5F55;
+$error-color: #fe5f55;
 
 .search-bar {
-  // background-color: red;
   position: relative;
 
   .text-field {
@@ -23,7 +22,8 @@ $error-color: #FE5F55;
     filter: drop-shadow(4px 4px 20px rgba(0, 0, 0, 0.25));
     transition: ease-out 0.1s;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       border: 10px solid $dark-color;
       transition: ease 0.1s;
     }

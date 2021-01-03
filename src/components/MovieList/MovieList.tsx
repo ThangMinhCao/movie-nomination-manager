@@ -8,36 +8,47 @@ import {
 } from '@material-ui/icons';
 
 interface MovieListProps {
-  listName: string;
+  title: string;
+  movies: Array<MovieType>;
+
+  /**
+   * If true, the number of movies will be displayed 
+   */
   showElementsNumber?: boolean;
-  itemList: Array<MovieType>;
   nominate: (movie: MovieType) => void;
   removeNomination: (movie: MovieType) => void;
   isNominated: (movie: MovieType) => boolean;
 }
 
 const MovieList = ({
-  listName,
+  title,
   showElementsNumber = false,
-  itemList,
+  movies,
   nominate,
   removeNomination,
   isNominated,
 }: MovieListProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
+  /**
+   * Set the property "--colNum" by the number of movies to use in SASS file
+   */
   useEffect(() => {
     document.documentElement.style.setProperty(
       "--colNum",
-      itemList.length.toString()
+      movies.length.toString()
     );
   });
 
+  /**
+   * Scroll the movie list toward the given direction by 70% of whe window width
+   * @param dir "left" | "right"
+   */
   const scroll = (dir: string) => {
     if (dir === "left" && scrollRef.current) {
-      scrollRef.current.scrollLeft -= window.innerWidth * 0.8;
+      scrollRef.current.scrollLeft -= window.innerWidth * 0.7;
     } else if (dir === "right" && scrollRef.current) {
-      scrollRef.current.scrollLeft += window.innerWidth * 0.8;
+      scrollRef.current.scrollLeft += window.innerWidth * 0.7;
     }
   };
 
@@ -45,21 +56,20 @@ const MovieList = ({
     <div className="movie-list">
       <div className="polygon-shadow">
         <div className="polygon">
-          <div className="text">{listName}</div>
+          <div className="text">{title}</div>
           {showElementsNumber ? (
             <>
               <div className="divider" />
-              <div className="text">{itemList.length}</div>
+              <div className={movies.length < 5 ? "text" : "text-green"}>{movies.length}</div>
             </>
           ) : null}
         </div>
       </div>
-      {/* TODO Change styles of these buttons */}
       <div className="button-container">
         <div className="items-container" ref={scrollRef}>
-          {itemList.map((item, index) => (
+          {movies.map((item, index) => (
             <MovieCard
-              added={isNominated(item)}
+              nominated={isNominated(item)}
               key={index}
               movie={item}
               nominate={nominate}
