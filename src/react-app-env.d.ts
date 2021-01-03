@@ -1,6 +1,7 @@
 /// <reference types="react-scripts" />
 interface MovieType {
-  title: string,
-  year: number,
-  posterURL: string
+  Title: string,
+  Year: number,
+  Poster: string,
+  imdbID: string
 }

@@ -1,4 +1,3 @@
-import { forwardRef } from "react";
 import './MovieCard.scss';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
@@ -11,13 +10,13 @@ interface MovieCardProps {
 }
 
 const MovieCard = ({ movie, added, nominate, removeNomination }: MovieCardProps) => {
-  const { title, year, posterURL } = movie;
-  const splitName = title.split(':');
+  const { Title, Year, Poster } = movie;
+  const splitName = Title.split(":");
   return (
-    <div className="movie-card" style={{ backgroundImage: `url(${posterURL})` }} >
-      <div className={Boolean(posterURL) ? "hover-overlay" : "missing-poster-overlay"}>
+    <div className="movie-card" style={{ backgroundImage: `url(${Poster})` }} >
+      <div className={Boolean(Poster) && Poster !== "N/A" ? "hover-overlay" : "missing-poster-overlay"}>
         <div className="movie-year">
-          {year}
+          {Year}
         </div>
         <div className="movie-title">
           <span className="title">

@@ -1,7 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
+$main-font: 'Staatliches', cursive;
+$dark-color: #202C39;
+$standard-margin: 40px;
+$page-title-size: 140px;
+
 .components-container {
   height: 90vh;
   margin-top: auto;
   margin-right: auto;
   padding-left: 50px;
   padding-right: 50px;
+
+  .page-header {
+    width: 100%;
+    margin-top: $standard-margin;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap-reverse;
+
+    .page-title, .subtitle {
+      color: $dark-color;
+      font-family: $main-font;
+      font-size: $page-title-size;
+      min-width: 55%;
+      text-align: center;
+      filter: drop-shadow(4px 4px 12px rgba(0, 0, 0, 0.15));
+    }
+
+    .subtitle {
+      font-size: $page-title-size / 4;
+    }
+  }
 }

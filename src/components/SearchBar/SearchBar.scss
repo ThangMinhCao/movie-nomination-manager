@@ -1,19 +1,13 @@
-@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
 $text-field-height: 60px;
 $main-font: 'Staatliches', cursive;
 $dark-color: #202C39;
 $standard-margin: 40px;
 $text-field-font-size: 35px;
-$page-title-size: 140px;
+$error-color: #FE5F55;
 
-.page-header {
-  width: 100%;
-  margin-top: $standard-margin;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap-reverse;
+.search-bar {
+  // background-color: red;
+  position: relative;
 
   .text-field {
     outline: none;
@@ -35,12 +29,15 @@ $page-title-size: 140px;
     }
   }
 
-  .page-title {
-    color: $dark-color;
-    font-family: $main-font;
-    font-size: $page-title-size;
-    min-width: 55%;
+  .error-message {
+    position: absolute;
+    width: 100%;
+    bottom: 10px;
     text-align: center;
-    filter: drop-shadow(4px 4px 12px rgba(0, 0, 0, 0.15));
+    font-family: $main-font;
   }
+}
+
+.search-bar > .error-message {
+  position: absolute;
 }

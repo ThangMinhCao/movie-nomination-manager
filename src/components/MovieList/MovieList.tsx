@@ -1,6 +1,11 @@
 import { useEffect, useRef } from "react";
+import Button from "@material-ui/core/Button";
 import "./MovieList.scss";
 import MovieCard from "../MovieCard/MovieCard";
+import {
+  ArrowLeft as ArrowLeftButton,
+  ArrowRight as ArrowRightButton,
+} from '@material-ui/icons';
 
 interface MovieListProps {
   listName: string;
@@ -50,20 +55,26 @@ const MovieList = ({
         </div>
       </div>
       {/* TODO Change styles of these buttons */}
-      <button onClick={() => scroll("left")}>Left</button>
-      <div className="items-container" ref={scrollRef}>
-        {itemList.map((item, index) => (
-          <MovieCard
-            added={isNominated(item)}
-            key={index}
-            movie={item}
-            nominate={nominate}
-            removeNomination={removeNomination}
-          />
-        ))}
-        <div style={{ flexShrink: 0, width: "0.1px" }} />
+      <div className="button-container">
+        <div className="items-container" ref={scrollRef}>
+          {itemList.map((item, index) => (
+            <MovieCard
+              added={isNominated(item)}
+              key={index}
+              movie={item}
+              nominate={nominate}
+              removeNomination={removeNomination}
+            />
+          ))}
+          <div style={{ flexShrink: 0, width: "0.1px" }} />
+        </div>
+        <Button className="left-button" onClick={() => scroll("left")}>
+          <ArrowLeftButton className="arrow-left-icon" />
+        </Button>
+        <Button className="right-button" onClick={() => scroll("right")}>
+          <ArrowRightButton className="arrow-right-icon" />
+        </Button>
       </div>
-      <button onClick={() => scroll("right")}>Right</button>
     </div>
   );
 };

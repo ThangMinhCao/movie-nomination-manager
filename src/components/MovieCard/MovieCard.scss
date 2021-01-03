@@ -2,7 +2,7 @@ $main-font: 'Staatliches', cursive;
 $card-border-radius: 20px;
 $card-overlay-padding: 10px;
 $title-size: 30px;
-$movie-card-width: 270 * 27 / 40 - 5px;
+$movie-card-width: 290 * 27 / 40 - 5px;
 $rotating-button-duration: 0.5s;
 
 @keyframes fadein {
@@ -19,11 +19,11 @@ $rotating-button-duration: 0.5s;
   flex-shrink: 0;
   width: $movie-card-width;
   border-radius: $card-border-radius;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  // border: 2px solid rgba(0, 0, 0, 1);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);
+  box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.3);
   overflow: hidden;
   animation: fadein 0.5s;
 
@@ -33,7 +33,7 @@ $rotating-button-duration: 0.5s;
     background-color: rgba(0, 0, 0, 0.8);
     height: calc(100% - #{$card-overlay-padding});
     padding: $card-overlay-padding;
-    border-radius: $card-border-radius;
+    border-radius: $card-border-radius - 1px;
     opacity: 0;
     transition: opacity 0.2s;
     text-align: center;
