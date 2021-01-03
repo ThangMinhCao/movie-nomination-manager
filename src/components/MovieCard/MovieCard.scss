@@ -1,24 +1,103 @@
+$main-font: 'Staatliches', cursive;
 $card-border-radius: 20px;
+$card-overlay-padding: 10px;
+$title-size: 30px;
+$movie-card-width: 270 * 27 / 40 - 5px;
+$rotating-button-duration: 0.5s;
 
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
 .movie-card {
   height: 100%;
+  flex-shrink: 0;
+  width: $movie-card-width;
   border-radius: $card-border-radius;
+  border: 1px solid rgba(0, 0, 0, 0.2);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
   box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+  animation: fadein 0.5s;
 
-  .hover-overlay {
-    background-color: rgba(0, 0, 0, 0.7);
-    height: 100%;
+  .hover-overlay, .missing-poster-overlay {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.8);
+    height: calc(100% - #{$card-overlay-padding});
+    padding: $card-overlay-padding;
     border-radius: $card-border-radius;
     opacity: 0;
-    transition: opacity 0.1s ease-out;
+    transition: opacity 0.2s;
+    text-align: center;
+
+    .movie-title {
+      flex: 1;
+    }
+
+    .movie-title, .title, .extension {
+      width: fit-content;
+      display: flex;
+      flex-direction: column;
+      text-align: left;
+      float: left;
+      white-space: nowrap;
+      font-family: $main-font;
+      color: #ffffff;
+      font-size: $title-size;
+      max-height: $title-size * 3.5;
+      transform: translateX(0);
+      transition: 1.6s ease-in-out;
+
+      .title:hover, .extension:hover {
+        transform: translateX(calc(#{$movie-card-width} - 25px - 100%));
+      }
+    }
+
+    .movie-year {
+      text-align: right;
+      font-family: $main-font;
+      color: #ffffff;
+      font-size: $title-size / 1.5;
+    }
+
+    .button, .button-remove {
+      align-self: center;
+      color: rgba(130, 220, 130, 1);
+      width: 90px;
+      height: 90px;
+      transition: all $rotating-button-duration;
+      transition-property: color, transform, background-color;
+      &:hover {
+        background-color: rgba(170, 255, 170, 0.1);
+      }
+    }
+
+    .icon {
+      font-size: 80px;
+    }
+    .button-remove {
+      transform: rotate(45deg);
+      color: rgba(220, 130, 130, 1);
+      transition: all $rotating-button-duration;
+      transition-property: color, transform;
+      transition-property: color, transform, background-color;
+      &:hover {
+        background-color: rgba(255, 170, 170, 0.1);
+      }
+    }
   }
 
-  &:hover .hover-overlay {
+  &:hover .hover-overlay, .missing-poster-overlay {
     visibility: visible;
     opacity: 1;
-    transition: visibility 0s, opacity 0.1s ease-out;
+    transition: visibility 0s, opacity 0.2s;
   }
 }
