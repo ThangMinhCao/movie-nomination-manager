@@ -2,18 +2,9 @@ $main-font: 'Staatliches', cursive;
 $card-border-radius: 20px;
 $card-overlay-padding: 10px;
 $title-size: 30px;
-$movie-card-width: 290 * 27 / 40 - 5px;
+$movie-card-width: 300 * 27 / 40 - 5px;
 $rotating-button-duration: 0.5s;
 
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
-}
 .movie-card {
   margin-right: 10px;
   height: 100%;
@@ -26,7 +17,6 @@ $rotating-button-duration: 0.5s;
   background-size: cover;
   box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.3);
   overflow: hidden;
-  animation: fadein 0.5s;
 
   .hover-overlay, .missing-poster-overlay {
     display: flex;
@@ -53,12 +43,11 @@ $rotating-button-duration: 0.5s;
       font-family: $main-font;
       color: #ffffff;
       font-size: $title-size;
-      max-height: $title-size * 3.5;
       transform: translateX(0);
       transition: 1.6s ease-in-out;
 
       .title:hover, .extension:hover {
-        transform: translateX(calc(#{$movie-card-width} - 25px - 100%));
+        transform: translateX(calc(#{$movie-card-width} - 100% - #{$card-overlay-padding} * 2));
       }
     }
 
@@ -70,6 +59,8 @@ $rotating-button-duration: 0.5s;
     }
 
     .button, .button-remove {
+      flex: 0;
+      margin-bottom: 10px;
       align-self: center;
       color: rgba(130, 220, 130, 1);
       width: 90px;

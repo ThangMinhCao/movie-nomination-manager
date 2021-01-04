@@ -4,11 +4,12 @@ $dark-color: #202c39;
 $standard-margin: 40px;
 $text-field-font-size: 35px;
 $error-color: #fe5f55;
+$ready-color: rgba(130, 220, 130, 1);
 
 .search-bar {
   position: relative;
 
-  .text-field {
+  .text-field, .text-field-ready {
     outline: none;
     font-family: $main-font;
     height: $text-field-height;
@@ -21,12 +22,19 @@ $error-color: #fe5f55;
     padding-right: 30px;
     filter: drop-shadow(4px 4px 20px rgba(0, 0, 0, 0.25));
     transition: ease-out 0.1s;
+    transition: background-color 1s;
 
     &:hover,
     &:focus {
       border: 10px solid $dark-color;
       transition: ease 0.1s;
     }
+  }
+
+  .text-field-ready {
+    background-color: $ready-color;
+    color: $dark-color;
+    transition: 1s;
   }
 
   .error-message {

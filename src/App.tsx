@@ -11,12 +11,10 @@ const App = () => {
   const [results, setResults] = useState<Array<MovieType>>([]);
   const [nominations, setNominations] = useState<Array<MovieType>>([]);
 
-  /**
-   * Call the API to search for title every time "searchTerm" change
-   */
   useEffect(() => {
-    setSearchError("");
-    setResults([]);
+    /**
+     * Call the API to search for title every time "searchTerm" change
+     */
     const searchMovie = async (searchTerm: string) => {
       try {
         const response = await axios.get(
@@ -37,9 +35,20 @@ const App = () => {
       return false;
     };
 
-    const trimmedTerm = searchTerm.trim();
-    if (trimmedTerm !== "") {
-      searchMovie(searchTerm);
+    /**
+     * Only start searching after the user stops typing for 800 milliseconds
+     */
+    const delayedSearch = setTimeout(() => {
+      setSearchError("");
+      setResults([]);
+      const trimmedTerm = searchTerm.trim();
+      if (trimmedTerm !== "") {
+        searchMovie(searchTerm);
+      }
+    }, 500);
+
+    return () => {
+      clearTimeout(delayedSearch);
     }
   }, [searchTerm]);
 
@@ -101,12 +110,16 @@ const App = () => {
    * @param movie
    */
   const removeNomination = (movie: MovieType): void => {
-    if (!nominations.includes(movie)) {
+    if (!isNominated(movie)) {
       console.log("The given movie is not in the nomination list");
       return;
     }
     setNominations(nominations.filter((item) => !isEquals(item, movie)));
   };
+
+  const clearNominationList = (): void => {
+    setNominations([]);
+  }
 
   /**
    * Check if "movie" is nominated or not
@@ -128,6 +141,7 @@ const App = () => {
           error={searchError}
           value={searchTerm}
           onChange={(event) => setSearchTerm(event.target.value)}
+          ready={nominations.length === 5}
         />
         <div className="page-title">
           The Shoppies
@@ -138,13 +152,16 @@ const App = () => {
         isNominated={isNominated}
         nominate={addNomination}
         removeNomination={removeNomination}
+        clearNominations={clearNominationList}
         title="Results"
         movies={results}
+        hidden={nominations.length === 5}
       />
       <MovieList
         isNominated={isNominated}
         nominate={addNomination}
         removeNomination={removeNomination}
+        clearNominations={clearNominationList}
         title="Nominations"
         showElementsNumber
         movies={nominations}

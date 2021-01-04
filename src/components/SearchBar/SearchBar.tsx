@@ -5,16 +5,18 @@ interface SearchBarProps {
   value: string;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   error: string;
+  ready: boolean;
 }
 
-const SearchBar = ({ value, onChange, error }: SearchBarProps) => {
+const SearchBar = ({ value, onChange, error, ready }: SearchBarProps) => {
   return (
     <div className="search-bar">
       <input
-        value={value}
+        value={ready ? "Your nomination list is ready!" : value}
         onChange={onChange}
-        className="text-field"
+        className={ready ? "text-field-ready" : "text-field"}
         placeholder="Search..."
+        disabled={ready}
       />
       <div className="error-message">
         {error}

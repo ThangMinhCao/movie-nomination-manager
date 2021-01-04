@@ -3,8 +3,6 @@ $spacing: 10px;
 $main-font: "Staatliches", cursive;
 $shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
 $poster-size-by-height: 27 / 40;
-$movie-card-width: ($list-height - $spacing) * $poster-size-by-height;
-$movie-card-height: $list-height - 2 * $spacing;
 $list-title-color: #eaeaea;
 $dark-color: #202c39;
 $list-border-radius: 20px;
@@ -14,12 +12,14 @@ $arrow-icon-color: rgba(0, 0, 0, 0.35);
   --colNum: 4;
 }
 
-.movie-list {
+.movie-list, .hidden-list {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: auto;
   margin-top: 30px;
+  max-height: 1000px;
+  transition: 2.5s;
 
   .polygon {
     display: flex;
@@ -36,7 +36,7 @@ $arrow-icon-color: rgba(0, 0, 0, 0.35);
         rgb(105, 105, 105, 0.5)
       ),
       $dark-color;
-    clip-path: polygon(15% 0%, 85% 0%, 100% 100%, 0% 100%);
+    clip-path: polygon(13% 0%, 87% 0%, 100% 100%, 0% 100%);
 
     .text, .text-green {
       font-family: $main-font;
@@ -102,6 +102,7 @@ $arrow-icon-color: rgba(0, 0, 0, 0.35);
     right: 0;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+
     .arrow-right-icon {
       color: $arrow-icon-color;
       position: absolute;
@@ -109,7 +110,7 @@ $arrow-icon-color: rgba(0, 0, 0, 0.35);
     }
   }
 
-  .items-container {
+  .items-container, .big-container {
     display: flex;
     margin: auto;
     overflow-x: auto;
@@ -118,11 +119,13 @@ $arrow-icon-color: rgba(0, 0, 0, 0.35);
 
     height: $list-height;
     width: calc(100% - 65px);
+
     padding: $spacing;
     background-color: #ffffff;
     border-radius: $list-border-radius;
     box-shadow: $shadow;
     z-index: 1000;
+    transition: 0.7s;
 
     &::-webkit-scrollbar {
       height: 6px;
@@ -141,7 +144,20 @@ $arrow-icon-color: rgba(0, 0, 0, 0.35);
     }
   }
 
+  .big-container {
+    height: $list-height * 2;
+    width: fit-content;
+    padding-right: 0;
+    transition: 2s;
+  }
+
   .items-container::after {
     content: "";
   }
+}
+
+.hidden-list {
+  max-height: 0;
+  opacity: 0;
+  transition: 1s;
 }

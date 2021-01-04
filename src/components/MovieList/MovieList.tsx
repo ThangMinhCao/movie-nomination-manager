@@ -1,15 +1,18 @@
 import { useEffect, useRef } from "react";
-import Button from "@material-ui/core/Button";
+import { Button, Tooltip } from "@material-ui/core";
 import "./MovieList.scss";
 import MovieCard from "../MovieCard/MovieCard";
 import {
   ArrowLeft as ArrowLeftButton,
   ArrowRight as ArrowRightButton,
+  Delete as DeleteIcon 
 } from '@material-ui/icons';
+import { IconButton } from "@material-ui/core";
 
 interface MovieListProps {
   title: string;
   movies: Array<MovieType>;
+  hidden?: boolean;
 
   /**
    * If true, the number of movies will be displayed 
@@ -18,15 +21,18 @@ interface MovieListProps {
   nominate: (movie: MovieType) => void;
   removeNomination: (movie: MovieType) => void;
   isNominated: (movie: MovieType) => boolean;
+  clearNominations: () => void;
 }
 
 const MovieList = ({
   title,
   showElementsNumber = false,
   movies,
+  hidden,
   nominate,
   removeNomination,
   isNominated,
+  clearNominations
 }: MovieListProps) => {
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -53,20 +59,29 @@ const MovieList = ({
   };
 
   return (
-    <div className="movie-list">
+    <div className={hidden ? "hidden-list" : "movie-list"}>
       <div className="polygon-shadow">
         <div className="polygon">
-          <div className="text">{title}</div>
-          {showElementsNumber ? (
-            <>
-              <div className="divider" />
-              <div className={movies.length < 5 ? "text" : "text-green"}>{movies.length}</div>
-            </>
-          ) : null}
+          {showElementsNumber 
+            ? (
+                <>
+                  <div className={movies.length < 5 ? "text" : "text-green"}>{movies.length}</div>
+                  <div className="divider" />
+                  <div className="text">{title}</div>
+                  <div className="divider" />
+                  <Tooltip placement="right-start" title="Clear all nominations">
+                    <IconButton onClick={() => clearNominations()}>
+                      <DeleteIcon style={{ color: "#ffffff" }} />
+                    </IconButton>
+                  </Tooltip>
+                </>
+              ) 
+            : <div className="text">{title}</div>
+          }
         </div>
       </div>
       <div className="button-container">
-        <div className="items-container" ref={scrollRef}>
+        <div className={title === "Nominations" && movies.length === 5 ? "big-container" : "items-container"} ref={scrollRef}>
           {movies.map((item, index) => (
             <MovieCard
               nominated={isNominated(item)}
