@@ -32,9 +32,10 @@ $ready-color: rgba(130, 220, 130, 1);
   }
 
   .text-field-ready {
+    display: flex;
     background-color: $ready-color;
+    align-items: center;
     color: $dark-color;
-    transition: 1s;
   }
 
   .error-message {

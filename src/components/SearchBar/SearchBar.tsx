@@ -11,16 +11,23 @@ interface SearchBarProps {
 const SearchBar = ({ value, onChange, error, ready }: SearchBarProps) => {
   return (
     <div className="search-bar">
-      <input
-        value={ready ? "Your nomination list is ready!" : value}
-        onChange={onChange}
-        className={ready ? "text-field-ready" : "text-field"}
-        placeholder="Search..."
-        disabled={ready}
-      />
-      <div className="error-message">
-        {error}
-      </div>
+      {
+        !ready
+        ? <> 
+            <input
+              value={value}
+              onChange={onChange}
+              className="text-field"
+              placeholder="Search..."
+            />
+            <div className="error-message">
+              {error}
+            </div>
+          </>
+        : <div className="text-field-ready">
+            Your nomination list is ready!
+          </div>
+      }
     </div>
   );
 };

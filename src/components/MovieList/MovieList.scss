@@ -7,6 +7,7 @@ $list-title-color: #eaeaea;
 $dark-color: #202c39;
 $list-border-radius: 20px;
 $arrow-icon-color: rgba(0, 0, 0, 0.35);
+$arrow-button-width: 25px;
 
 :root {
   --colNum: 4;
@@ -17,7 +18,7 @@ $arrow-icon-color: rgba(0, 0, 0, 0.35);
   flex-direction: column;
   align-items: center;
   margin: auto;
-  margin-top: 30px;
+  margin-bottom: 30px;
   max-height: 1000px;
   transition: 2.5s;
 
@@ -64,7 +65,7 @@ $arrow-icon-color: rgba(0, 0, 0, 0.35);
   }
 
   .button-container {
-    width: 100%;
+    width: auto;
     display: flex;
     position: relative;
   }
@@ -87,7 +88,7 @@ $arrow-icon-color: rgba(0, 0, 0, 0.35);
   }
 
   .left-button {
-    left: 0;
+    left: -$arrow-button-width;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 
@@ -99,7 +100,7 @@ $arrow-icon-color: rgba(0, 0, 0, 0.35);
   }
 
   .right-button {
-    right: 0;
+    right: -$arrow-button-width;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
 
@@ -118,7 +119,8 @@ $arrow-icon-color: rgba(0, 0, 0, 0.35);
     scroll-behavior: smooth;
 
     height: $list-height;
-    width: calc(100% - 65px);
+    width: 70vw;
+    min-width: 600px;
 
     padding: $spacing;
     background-color: #ffffff;
@@ -126,6 +128,7 @@ $arrow-icon-color: rgba(0, 0, 0, 0.35);
     box-shadow: $shadow;
     z-index: 1000;
     transition: 0.7s;
+    transition-property: opacity, height;
 
     &::-webkit-scrollbar {
       height: 6px;
@@ -146,9 +149,10 @@ $arrow-icon-color: rgba(0, 0, 0, 0.35);
 
   .big-container {
     height: $list-height * 2;
-    width: fit-content;
+    max-width: fit-content;
     padding-right: 0;
     transition: 2s;
+    transition-property: height;
   }
 
   .items-container::after {
