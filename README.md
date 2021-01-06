@@ -1,7 +1,7 @@
 # Movie Nominations Manager
 > The platform to nominate movies for **The Shoppies Movie Awards**.
 
-![Example Screenshot]('./examples/sample-screenshot.png')
+![Example Screenshot]('https://raw.githubusercontent.com/ThangMinhCao/movie-nominations-manager/master/examples/sample-screenshot.png')
 
 ### [Click here to try now](https://movie-nominations-manager.netlify.app/)
   
