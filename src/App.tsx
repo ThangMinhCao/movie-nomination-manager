@@ -3,58 +3,13 @@ import { useState, useEffect } from "react";
 import SearchBar from "./components/SearchBar/SearchBar";
 import MovieList from "./components/MovieList/MovieList";
 import "./App.scss";
-import axios from "axios";
+import useSearchMovies from "./hooks/useSeachMovies";
 
 const App = () => {
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  const [searchError, setSearchError] = useState<string>("");
-  const [results, setResults] = useState<Array<MovieType>>([]);
+  const [query, setQuery] = useState<string>("");
+  const {results, error, loading, hasMore, increasePageNumber} = useSearchMovies(query);
   const [nominations, setNominations] = useState<Array<MovieType>>([]);
 
-  useEffect(() => {
-    /**
-     * Call the API to search for title every time "searchTerm" change
-     */
-    const searchMovie = async (searchTerm: string) => {
-      try {
-        const response = await axios.get(
-          `http://www.omdbapi.com/?apikey=456ecb13&s=${searchTerm}`
-        );
-        if (response.data.Response === "False") {
-          let message = response.data.Error;
-          if (message === "Too many results.") {
-            message += " Please provide more specific search term.";
-          }
-          setSearchError(message);
-        } else {
-          setResults(response.data.Search);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-      return false;
-    };
-
-    /**
-     * Only start searching after the user stops typing for 800 milliseconds
-     */
-    const delayedSearch = setTimeout(() => {
-      setSearchError("");
-      setResults([]);
-      const trimmedTerm = searchTerm.trim();
-      if (trimmedTerm !== "") {
-        searchMovie(searchTerm);
-      }
-    }, 500);
-
-    return () => {
-      clearTimeout(delayedSearch);
-    }
-  }, [searchTerm]);
-
-  /**
-   * Check and get data from localStorage (if available)
-   */
   useEffect(() => {
     const localData = localStorage.getItem("nominations");
     if (localData && JSON.parse(localData)) {
@@ -138,9 +93,9 @@ const App = () => {
     <div className="components-container">
       <div className="page-header">
         <SearchBar
-          error={searchError}
-          value={searchTerm}
-          onChange={(event) => setSearchTerm(event.target.value)}
+          error={error}
+          value={query}
+          onChange={(event) => setQuery(event.target.value)}
           ready={nominations.length === 5}
         />
         <div className="page-title">
@@ -156,6 +111,11 @@ const App = () => {
         title="Results"
         movies={results}
         hidden={nominations.length === 5}
+        increasePageNumber={() => {
+          increasePageNumber()
+        }}
+        hasMore={hasMore}
+        loading={loading}
       />
       <MovieList
         isNominated={isNominated}

@@ -135,6 +135,7 @@ $arrow-button-width: 25px;
       width: 10px;
     }
     &::-webkit-scrollbar-thumb {
+      min-width: 20px;
       background-color: #cfcfcf;
       border-left: 25px solid transparent;
       border-right: 25px solid transparent;
@@ -157,6 +158,19 @@ $arrow-button-width: 25px;
 
   .items-container::after {
     content: "";
+  }
+
+  .progress {
+    width: 0.1px;
+    align-self: center;
+  }
+
+  .end-text, .end-text-hidden {
+    font-family: $main-font;
+  }
+
+  .end-text-hidden {
+    display: none;
   }
 }
 
