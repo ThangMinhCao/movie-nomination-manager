@@ -43,7 +43,7 @@ const useSearchMovies = (query: string) => {
       setLoading(true);
       delayedSearch = setTimeout(() => {
         axios.get(
-          `http://www.omdbapi.com/?apikey=456ecb13&s=${query}&page=${pageNumber}`
+          `https://www.omdbapi.com/?apikey=456ecb13&s=${query}&page=${pageNumber}`
         ).then(response => {
           if (response.data.Response === "False") {
             let message = response.data.Error;
