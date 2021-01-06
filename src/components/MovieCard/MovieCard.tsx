@@ -2,6 +2,8 @@ import "./MovieCard.scss";
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from "@material-ui/icons/Add";
 
+const noPoster =
+  "https://upload.wikimedia.org/wikipedia/commons/c/c2/No_image_poster.png";
 interface MovieCardProps {
   movie: MovieType;
   nominated?: boolean;
@@ -21,26 +23,41 @@ const MovieCard = ({
    * Split the title by ":" for some movie titles have it
    */
   const splitName = Title.split(":");
-  return (
-    <div className="movie-card" style={{ backgroundImage: `url(${Poster})` }}>
-      <div
-        className={
-          Boolean(Poster) && Poster !== "N/A"
-            ? "hover-overlay"
-            : "missing-poster-overlay"
-        }
-      >
-        <div className="movie-year">{Year}</div>
+
+  const hasPoster = () => {
+    return Boolean(Poster) && Poster !== "N/A";
+  };
+
+  const renderInformation = (color?: string) => {
+    return (
+      <>
+        <div className="movie-year" style={{ color }}>{Year}</div>
         <div className="movie-title">
-          <span className="title">
+          <span className="title" style={{ color }}>
             {splitName[0] + (splitName.length > 1 ? ":" : "")}
           </span>
           {splitName.length <= 1 ? null : (
             <>
-              <span className="extension">{splitName[1]}</span>
+              <span className="extension" style={{ color }}>{splitName[1]}</span>
             </>
           )}
         </div>
+      </>
+    )
+  }
+
+  return (
+    <div
+      className="movie-card"
+      style={{
+        backgroundImage: `url(${hasPoster() ? Poster : noPoster})`,
+      }}
+    >
+      <div className={!hasPoster() ? "show-title" : "hidden-title"}>
+        {renderInformation("#000000")}
+      </div>
+      <div className="hover-overlay">
+        {renderInformation()}
         <IconButton
           className={nominated ? "button-remove" : "button"}
           onClick={() =>

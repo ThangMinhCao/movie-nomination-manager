@@ -4,6 +4,7 @@ $card-overlay-padding: 10px;
 $title-size: 30px;
 $movie-card-width: 300 * 27 / 40 - 5px;
 $rotating-button-duration: 0.5s;
+$dark-color: #202c39;
 
 .movie-card {
   margin-right: 10px;
@@ -16,9 +17,10 @@ $rotating-button-duration: 0.5s;
   background-repeat: no-repeat;
   background-size: cover;
   box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.3);
+  position: relative;
   overflow: hidden;
 
-  .hover-overlay, .missing-poster-overlay {
+  .hover-overlay {
     display: flex;
     flex-direction: column;
     background-color: rgba(0, 0, 0, 0.8);
@@ -28,35 +30,6 @@ $rotating-button-duration: 0.5s;
     opacity: 0;
     transition: opacity 0.2s;
     text-align: center;
-
-    .movie-title {
-      flex: 1;
-    }
-
-    .movie-title, .title, .extension {
-      width: fit-content;
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-      float: left;
-      white-space: nowrap;
-      font-family: $main-font;
-      color: #ffffff;
-      font-size: $title-size;
-      transform: translateX(0);
-      transition: 1.6s ease-in-out;
-
-      .title:hover, .extension:hover {
-        transform: translateX(calc(#{$movie-card-width} - 100% - #{$card-overlay-padding} * 2));
-      }
-    }
-
-    .movie-year {
-      text-align: right;
-      font-family: $main-font;
-      color: #ffffff;
-      font-size: $title-size / 1.5;
-    }
 
     .button, .button-remove {
       flex: 0;
@@ -87,9 +60,53 @@ $rotating-button-duration: 0.5s;
     }
   }
 
-  &:hover .hover-overlay, .missing-poster-overlay {
+  .show-title {
+    padding: $card-overlay-padding;
+  }
+
+  .hidden-title {
+    display: none;
+  }
+
+  .movie-title {
+    flex: 1;
+  }
+
+  .movie-title, .title, .extension {
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    float: left;
+    white-space: nowrap;
+    font-family: $main-font;
+    color: #ffffff;
+    font-size: $title-size;
+    transform: translateX(0);
+    transition: 1.6s ease-in-out;
+
+    .title:hover, .extension:hover {
+      transform: translateX(calc(#{$movie-card-width} - 100% - #{$card-overlay-padding} * 2));
+    }
+  }
+
+  .movie-year {
+    text-align: right;
+    font-family: $main-font;
+    color: #ffffff;
+    font-size: $title-size / 1.5;
+  }
+
+  &:hover .hover-overlay {
     visibility: visible;
     opacity: 1;
     transition: visibility 0s, opacity 0.2s;
   }
+}
+
+.movie-card > .hover-overlay {
+  position: absolute;
+  width: 90%;
+  top: 0;
+  left: 0;
 }
