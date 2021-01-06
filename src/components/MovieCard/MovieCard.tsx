@@ -24,10 +24,17 @@ const MovieCard = ({
    */
   const splitName = Title.split(":");
 
+  /**
+   * Indicate if the current movie has poster or not
+   */
   const hasPoster = () => {
     return Boolean(Poster) && Poster !== "N/A";
   };
 
+  /**
+   * Render properly the movie's year and title
+   * @param color The color of the text. Default: #ffffff
+   */
   const renderInformation = (color?: string) => {
     return (
       <>

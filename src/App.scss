@@ -8,7 +8,7 @@ $page-title-size: 140px;
   width: 80vw;
   margin-left: 50px;
   margin-right: 50px;
-  min-width: 700px;
+  min-width: 650px;
   max-width: 2000px;
   padding-bottom: 20px;
   position: absolute;
@@ -29,8 +29,7 @@ $page-title-size: 140px;
       color: $dark-color;
       font-family: $main-font;
       font-size: $page-title-size;
-      min-width: 55%;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       text-align: center;
       filter: drop-shadow(4px 4px 12px rgba(0, 0, 0, 0.15));
     }
@@ -39,4 +38,13 @@ $page-title-size: 140px;
       font-size: $page-title-size / 4;
     }
   }
+}
+
+.credit {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  font-family: $main-font;
+  float: right;
+  z-index: 100;
 }

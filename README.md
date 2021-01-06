@@ -1,5 +1,7 @@
 # Movie Nominations Manager
-> 
+> The platform to nominate movies for **The Shoppies Movie Awards**.
+
+![Example Screenshot]('./examples/sample-screenshot.png')
 
 ### [Click here to try now](https://movie-nominations-manager.netlify.app/)
   
@@ -32,6 +34,7 @@ The app will run in the development mode on `http://localhost:3000`.
 ## Built With
 
  - [React](https://reactjs.org/) and [create-react-app](https://github.com/facebook/create-react-app)
+ - [axios](https://www.npmjs.com/package/axios) - The library for HTTP requests
  - [TypeScript](https://www.typescriptlang.org/) - The main language
  - [SASS](https://sass-lang.com/) - The main styling
  - [Material UI](https://material-ui.com/) - For some minor components

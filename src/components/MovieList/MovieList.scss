@@ -126,7 +126,7 @@ $arrow-button-width: 25px;
     background-color: #ffffff;
     border-radius: $list-border-radius;
     box-shadow: $shadow;
-    z-index: 1000;
+    z-index: 10;
     transition: 0.7s;
     transition-property: opacity, height;
 

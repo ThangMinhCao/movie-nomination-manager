@@ -90,6 +90,7 @@ const App = () => {
   };
 
   return (
+    <>
     <div className="components-container">
       <div className="page-header">
         <SearchBar
@@ -127,6 +128,8 @@ const App = () => {
         movies={nominations}
       />
     </div>
+    <div className="credit">Made by Minh Thang Cao</div>
+    </>
   );
 };
 

@@ -18,7 +18,7 @@ const SearchBar = ({ value, onChange, error, ready }: SearchBarProps) => {
               value={value}
               onChange={onChange}
               className="text-field"
-              placeholder="Search..."
+              placeholder="Search and nominate movies..."
             />
             <div className="error-message">
               {error}
