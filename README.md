@@ -38,6 +38,12 @@ The app will run in the development mode on `http://localhost:3000`.
  - [Material UI](https://material-ui.com/) - For some minor components
  - [React Waypoint](https://civiccc.github.io/react-waypoint/) - To detect the end of a list for infinite scrolling
 
+## Additional Features
+
+- Infinite scrolling
+- Different design
+- Save nominations after closing the browser
+
 ## Deployment
 
 Deployed and hosted with [Netlify](https://www.netlify.com/).
